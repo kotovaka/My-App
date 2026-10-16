@@ -19,7 +19,7 @@ public class Main {
         product = "smartphone";
         no = 1;
         days = 5;
-        price = 810.23;
+        price = 810.2273333333333;
         quantity = 15;
 
         totalAmount = price * quantity;
