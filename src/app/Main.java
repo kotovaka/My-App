@@ -1,41 +1,32 @@
+
 package app;
+
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        String product;
-        int no;
-        int days;
+        System.out.println("Enter the income amount to calculate the tax amount:");
 
-        double price;
-        String currency;
-        int quantity;
+        Scanner sc = new Scanner(System.in);
+        double incomeAmount = sc.nextDouble();
 
-        double totalAmount;
-        double amountByDay;
+        double incomePercentage;
 
-        currency = "EUR";
+        if (incomeAmount >= 0 && incomeAmount <= 10000) {
+            incomePercentage = 2.5;
+        } else if (incomeAmount <= 25000) {
+            incomePercentage = 4.3;
+        } else {
+            incomePercentage = 6.7;
+        }
 
-        product = "smartphone";
-        no = 1;
-        days = 5;
-        price = 810.2273333333333;
-        quantity = 15;
+        double taxAmount = incomeAmount * incomePercentage / 100;
 
-        totalAmount = price * quantity;
-        amountByDay = totalAmount / days;
-        System.out.printf("Product No %d: %s,%ntotal sales for %d days is %s %.2f,%nsales by day is %s %.2f.%n",
-                no, product, days, currency, totalAmount, currency, amountByDay);
-
-        product = "laptop";
-        no = 2;
-        days = 7;
-        price = 806.680769;
-        quantity = 13;
-
-        totalAmount = price * quantity;
-        amountByDay = totalAmount / days;
-        System.out.printf("Product No %d: %s,%ntotal sales for %d days is %s %.2f,%nsales by day is %s %.2f.%n",
-                no, product, days, currency, totalAmount, currency, amountByDay);
+        System.out.printf(
+                "The tax amount on the income is %.2f at a rate of %.1f%%%n",
+                taxAmount, incomePercentage
+        );
     }
 }
