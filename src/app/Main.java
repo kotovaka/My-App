@@ -1,32 +1,25 @@
 
 package app;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("Enter the income amount to calculate the tax amount:");
+        int num = 0;
+        int sum = 0;
 
-        Scanner sc = new Scanner(System.in);
-        double incomeAmount = sc.nextDouble();
 
-        double incomePercentage;
-
-        if (incomeAmount >= 0 && incomeAmount <= 10000) {
-            incomePercentage = 2.5;
-        } else if (incomeAmount <= 25000) {
-            incomePercentage = 4.3;
-        } else {
-            incomePercentage = 6.7;
+        for(int i=1; i<=6; i++){
+            num = i;
+            sum += i;
+            System.out.println(num + ") Num is " + num + ", sum is " + sum );
         }
+        System.out.println("------------------------\nSum of numbers is " + sum);
 
-        double taxAmount = incomeAmount * incomePercentage / 100;
 
-        System.out.printf(
-                "The tax amount on the income is %.2f at a rate of %.1f%%%n",
-                taxAmount, incomePercentage
-        );
     }
 }
+
