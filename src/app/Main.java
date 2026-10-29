@@ -1,80 +1,61 @@
-
 package app;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
+
 
 public class Main {
 
     public static void main(String[] args) {
 
-
-        int[] arr = new int[20];
+        int[] arr = new int[15];
         Random random = new Random();
-        for(int i = 0; i< arr.length; i++){
-            arr[i] = random.nextInt(-100, 101);
-
-        }
-        System.out.println("Елементи масиву: " + Arrays.toString(arr));
-
-
-        int negativeSum = 0;
         for (int i = 0; i < arr.length; i++) {
-            if (arr[i] < 0) {
-                negativeSum = negativeSum + arr[i];
-            }
+            arr[i] = random.nextInt(1, 101);
         }
+        System.out.println("Початковий вигляд масиву: " + Arrays.toString(arr));
 
-        System.out.println("Сума від'ємних чисел: " + negativeSum);
-
-        int evenCount = 0;
-        int oddCount = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] % 2 == 0) {
-                evenCount +=  1;
-            } else {
-                oddCount += 1;
-            }
-        }
-        System.out.println("Кількість парних чисел: " + evenCount);
-        System.out.println("Кількість непарних чисел: " + oddCount);
-
-        int minIndex = 0;
-        int maxIndex = 0;
         for (int i = 1; i < arr.length; i++) {
-            if (arr[i] < arr[minIndex]) {
-                minIndex = i;
-            }
-            if (arr[i] > arr[maxIndex]) {
-                maxIndex = i;
-            }
-        }
-        System.out.println("Найменший елемент: " + arr[minIndex] + " (з індексом " + minIndex + ")");
-        System.out.println("Найбільший елемент: " + arr[maxIndex] + " (з індексом " + maxIndex + ")");
+            int key = arr[i];
+            int count = 1;
 
-        int negIndex = -1;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] < 0) {
-                negIndex = i;
+            while (i - count >= 0 && arr[i - count] > key) {
+                arr[i - count + 1] = arr[i - count];
+                count++;
+            }
+            arr[i - count + 1] = key;
+        }
+
+        System.out.println("Відсортований масив: " + Arrays.toString(arr));
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введіть число для пошуку: ");
+        int target = scanner.nextInt();
+
+        int left = 0;
+        int right = arr.length - 1;
+        int index = -1;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+
+            if (arr[mid] == target) {
+                index = mid;
                 break;
+            } else if (arr[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
             }
         }
 
-        if (negIndex == -1) {
-            System.out.println("Від'ємних чисел у масиві немає");
-        } else if (negIndex == arr.length - 1) {
-            System.out.println("Після першого від'ємного числа - чисел немає");
+        if (index != -1) {
+            System.out.println("Індекс числа " + target + " у відсортованому масиві: " + index);
         } else {
-            double sum = 0;
-            int count = 0;
-            for (int i = negIndex + 1; i < arr.length; i++) {
-                sum = sum + arr[i];
-                count = count + 1;
-            }
-            double average = sum / count;
-            System.out.printf("Середнє арифметичне чисел після першого від'ємного числа: %.2f%n", average);
+            System.out.println("Числа " + target + " немає в масиві");
         }
+
+
 
     }
 }
-
